@@ -1,0 +1,8 @@
+<div>
+    <div class="img-container"><img [src]="customer.photo" *ngIf="customer.photo"></div>
+    <h1>{{customer.email}}</h1>
+    <h1>{{customer.name}}</h1>
+    <h1>{{customer.lastname}}</h1>
+    <button mat-raised-button color="primary" (click)="onBack()">Back</button>
+    <button mat-raised-button color="primary" (click)="onEdit()">Edit</button>
+</div>

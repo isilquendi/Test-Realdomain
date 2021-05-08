@@ -1,0 +1,32 @@
+table {
+    width: 600px;
+  }
+  
+button {
+    margin-top: 20px;
+}
+
+.mat-raised-button.mat-primary {
+    background-color: #00b5ad;
+}
+
+.mat-column-del {
+    pointer-events: none;
+}
+.mat-column-del i{
+    pointer-events: all;
+}
+
+tr.cdk-row:hover {
+    background-color: whitesmoke;
+    cursor: pointer;
+}
+
+label.mat-form-field-label {
+    color : #00b5ad;
+}
+
+.mat-input-element {
+    caret-color: #00b5ad;
+}
+

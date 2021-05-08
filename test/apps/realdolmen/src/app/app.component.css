@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;600;800&display=swap');
+
+header, main {
+  font-family: 'Roboto', sans-serif;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+  margin-top : 20px;
+  
+}
+
+main h1 span {
+  text-transform: capitalize;
+}
+
+main h1 {
+  text-align: center;
+  font-weight: 300;
+}
