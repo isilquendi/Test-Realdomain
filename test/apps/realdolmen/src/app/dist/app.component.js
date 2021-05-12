@@ -12,6 +12,7 @@ var app_1 = require("firebase/app");
 require("firebase/analytics");
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
+        this.className = '';
         this.title = 'realdolmen';
         var firebaseConfig = {
             apiKey: "AIzaSyDPkSGWPXLtrMVS1XuSP2mCdwMFEUPP-hA",
@@ -26,6 +27,12 @@ var AppComponent = /** @class */ (function () {
         // Initialize Firebase
         app_1["default"].initializeApp(firebaseConfig);
     }
+    AppComponent.prototype.childToParent = function (name) {
+        this.className = name;
+    };
+    __decorate([
+        core_1.HostBinding('class')
+    ], AppComponent.prototype, "className");
     AppComponent = __decorate([
         core_1.Component({
             selector: 'test-root',

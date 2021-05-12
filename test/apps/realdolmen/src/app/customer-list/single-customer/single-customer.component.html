@@ -61,18 +61,18 @@
                 <div class="availability">
                     <label>Availability :</label>
                     <div class="element-availability-interests">
-                    <span class="material-icons" >
+                    <mat-icon class="material-icons" color="primary">
                         radio_button_checked
-                        </span>{{customer.availability}}
+                        </mat-icon>{{customer.availability}}
                     </div>
                 </div>
                 <div  *ngIf="customer.interests" class="interests">
                     <label>Interests :</label>
                     <div  *ngFor="let interest of customer.interests;" class="interets-elements">
                     <div  *ngIf="interest.interested" class="element-availability-interests">
-                        <mat-icon  class="material-icons" fontSet="material-icons-sharp">
+                        <mat-icon  class="material-icons" fontSet="material-icons-sharp" color="primary">
                             check_box_sharp
-                            </mat-icon >{{interest.name}}
+                            </mat-icon>{{interest.name}}
                         </div>
                     </div>
                 </div>

@@ -16,7 +16,6 @@
 
 .photo button {
     margin-top: 10px;
-    background-color: #00b5ad;
 }
 
 .photo img {
@@ -26,6 +25,10 @@
     border-radius: 50%;
     border : 10px  #00b5ad solid;
     box-sizing: border-box;
+}
+
+::ng-deep .darkMode .photo img {
+    border-color :  #2196f3 !important;
 }
 
 .gender-birthday {
@@ -57,6 +60,10 @@
 
 mat-icon {
     color :rgba(0, 0, 0, 0.54);
+}
+
+::ng-deep .darkMode mat-icon {
+    color : rgba(255, 255, 255, 0.7)
 }
 
 

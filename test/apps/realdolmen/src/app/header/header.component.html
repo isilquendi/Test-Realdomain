@@ -1,4 +1,4 @@
-<nav class="navbar" >
+<nav class="navbar">
     <ul>
         <li routerLinkActive="active">
             <a routerLink="dashboard">
@@ -17,4 +17,14 @@
             </a>
         </li>
     </ul>
+    <div class="darkMode-toggle">
+    <mat-icon>brightness_5</mat-icon>
+    <mat-slide-toggle [formControl]="toggleControl" name="toggleControl" color="primary"></mat-slide-toggle>
+    <mat-icon>bedtime</mat-icon>
+    </div>
+
 </nav>
+
+
+    
+    

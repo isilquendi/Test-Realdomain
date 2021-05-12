@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -13,7 +12,8 @@ import { CustomerListModule } from './modules/customer-list/customer-list.module
 import { SingleCustomerModule } from './modules/single-customer/single-customer.module';
 import { CustomerFormModule } from './modules/customer-form/customer-form.module';
 import { MatIconModule} from "@angular/material/icon";
-
+import { MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { MatToolbarModule } from "@angular/material/toolbar";
 
 const appRoutes : Routes  = [
   {path : 'dashboard', component : DashboardComponent },
@@ -36,7 +36,10 @@ const appRoutes : Routes  = [
             CustomerListModule,
             SingleCustomerModule,
             CustomerFormModule,
-            MatIconModule
+            MatIconModule,
+            MatSlideToggleModule,
+            MatToolbarModule,
+
   ],
   providers: [CustomersService],
   bootstrap: [AppComponent],

@@ -19,7 +19,21 @@ tr.cdk-row:hover {
     cursor: pointer;
 }
 
+::ng-deep .darkMode tr.cdk-row:hover {
+    background-color: rgb(85, 85, 85);
+}
 
+.loading {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    background: white;
+    z-index: 10;
+    left: 0;
+}
 
 mat-row mat-cell:last-child, mat-header-cell:last-child {
     

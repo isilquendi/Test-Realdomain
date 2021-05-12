@@ -22,7 +22,9 @@ export class CustomerListComponent implements OnInit, OnDestroy, AfterViewInit {
   displayedColumns: string[] = ['select','name', 'lastname', 'email','creationDate','modificationDate','del'];
   customerSubscription : Subscription;
   dataSource = new MatTableDataSource();
-  selection = new SelectionModel(true,[])
+  selection = new SelectionModel(true,[]);
+
+  loading = true;
 
   constructor(private customersService : CustomersService, private router: Router) { 
     
@@ -31,16 +33,20 @@ export class CustomerListComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
     this.customerSubscription =this.customersService.customersSubject.subscribe(
       (customers : Customer[]) => {
+        console.log(customers.length);
+        if(customers.length > 0) {
+          this.loading=false;  
+        }
         this.customers = customers;
         this.dataSource = new MatTableDataSource(customers);
-        this.dataSource.paginator = this.paginator;
+        
         this.sortCustomer();
         
       }
     )
     this.customersService.getCustomers();
     this.customersService.emitCustomers();
-   
+    
   }
 
 
@@ -48,7 +54,6 @@ export class CustomerListComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
     this.sortCustomer();
   }
 
@@ -70,8 +75,9 @@ export class CustomerListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   sortCustomer() {
-  
+    this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    
   }
 
   
@@ -87,7 +93,7 @@ export class CustomerListComponent implements OnInit, OnDestroy, AfterViewInit {
     else {
       this.dataSource = new MatTableDataSource(this.customers);  
     }
-    this.dataSource.paginator = this.paginator;
+    
     this.sortCustomer();
     
 

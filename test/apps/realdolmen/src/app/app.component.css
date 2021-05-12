@@ -5,13 +5,17 @@ header, main {
 }
 
 main {
- 
   width: 100%;
-  flex-direction: column;
-  margin-top : 20px;
-  flex-grow: 1;
+}
+
+
+::ng-deep .darkMode main {
+  background-color: #313131;
+  color : #FFFFFF
+}
+
+.content {
   margin: 0 20px;
-  
 }
 
 main h1 span {

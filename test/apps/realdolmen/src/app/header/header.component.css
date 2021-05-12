@@ -6,10 +6,23 @@ nav {
     min-width: 200px;
 }
 
+::ng-deep  .darkMode nav {
+    background-color: #424242;
+}
+
 nav ul  {
  list-style-type: none;
  padding: 20px 0px;
  margin: 0px;
+}
+
+.darkMode-toggle {
+    display: flex;
+    justify-content: center;
+}
+
+.darkMode-toggle mat-icon {
+    color: white;
 }
 
 nav ul li a {
@@ -36,4 +49,9 @@ nav ul li a:hover {
     color: #00b5ad;
     background-color: white;
     
+}
+
+
+::ng-deep .darkMode nav ul li a:hover {
+    color: #2196f3 !important;
 }

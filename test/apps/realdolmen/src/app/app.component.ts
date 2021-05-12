@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,HostBinding } from '@angular/core';
 import firebase from "firebase/app";
 import "firebase/analytics";
 
@@ -8,7 +8,9 @@ import "firebase/analytics";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
+
 export class AppComponent {
+  @HostBinding('class') className = '';
   title = 'realdolmen';
   constructor() {
   var firebaseConfig = {
@@ -24,5 +26,11 @@ export class AppComponent {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   
+  }
+  
+
+  childToParent(name){
+    this.className = name;
+    
   }
 }

@@ -1,6 +1,8 @@
 <header>
-  <test-header></test-header> 
+  <test-header (childToParent)="childToParent($event)"></test-header> 
 </header>
-<main>
-  <router-outlet></router-outlet>
+<main class="main">
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
 </main>

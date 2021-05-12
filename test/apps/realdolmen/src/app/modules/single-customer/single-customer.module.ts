@@ -5,6 +5,7 @@ import { SingleCustomerRoutingModule } from './single-customer-routing.module';
 import { SingleCustomerComponent } from '../../customer-list/single-customer/single-customer.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule} from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -14,7 +15,8 @@ import { MatIconModule} from '@angular/material/icon';
     CommonModule,
     SingleCustomerRoutingModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
   ]
 })
 export class SingleCustomerModule { }

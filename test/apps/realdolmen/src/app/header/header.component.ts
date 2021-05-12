@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,OnInit, Output , EventEmitter } from '@angular/core';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'test-header',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
-
+ 
+  @Output() childToParent = new EventEmitter<String>();
+  constructor(private overlay: OverlayContainer) { }
+  toggleControl = new FormControl(false);
   ngOnInit(): void {
+    this.toggleControl.valueChanges.subscribe((darkMode) => {
+      const darkClassName = 'darkMode';
+      this.childToParent.emit( darkMode ? darkClassName : '');
+      if (darkMode) {
+        this.overlay.getContainerElement().classList.add(darkClassName);
+      } else {
+        this.overlay.getContainerElement().classList.remove(darkClassName);
+      }
+      
+    });
   }
 
 }
