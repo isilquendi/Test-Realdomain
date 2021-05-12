@@ -50,9 +50,6 @@ export class CustomerFormComponent implements OnInit {
                ) { }
 
   ngOnInit(): void {
-
-
-
     this._adapter.setLocale('gb');
     if (this.route.snapshot.params['id']) {
       this.customer= new Customer('','','');
@@ -98,8 +95,7 @@ export class CustomerFormComponent implements OnInit {
       birthday : [this.customer &&  this.customer.birthday ? new Date(this.customer.birthday).toISOString() : ''],
       description : [this.customer &&  this.customer.description ? this.customer.description : ''],
       availability : [this.customer && this.customer.availability ? this.customer.availability : 'Full-Time', [Validators.required]]
-    })
-    
+    }) 
   }
 
   onSaveCustomer() {
@@ -140,7 +136,6 @@ export class CustomerFormComponent implements OnInit {
       newCustomer.creationDate = Date.now();
     }
 
-    
     newCustomer.modificationDate = Date.now();
 
     newCustomer.interests = this.interests;
@@ -152,8 +147,6 @@ export class CustomerFormComponent implements OnInit {
     }
     
     newCustomer.description = description;
-    
-
 
     if(this.isEdit)  {
       this.customerService.editCustomer(newCustomer);
@@ -163,9 +156,6 @@ export class CustomerFormComponent implements OnInit {
       this.customerService.createNewCustomer(newCustomer);
       this.router.navigate(['/customer']);
     }
-    
-    
-
   }
 
   onUploadFile(file : File) {
@@ -178,8 +168,6 @@ export class CustomerFormComponent implements OnInit {
       }
     )
   }
-
-  
 
   detectFiles(event) {
     this.onUploadFile(event.target.files[0]);

@@ -6,6 +6,7 @@ header, main {
 
 main {
   width: 100%;
+  transition: all ease 400ms;
 }
 
 
