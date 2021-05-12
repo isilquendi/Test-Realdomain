@@ -1,19 +1,16 @@
-table {
-    width: 600px;
-  }
-  
 button {
     margin-top: 20px;
 }
 
-.mat-raised-button.mat-primary {
-    background-color: #00b5ad;
+.mat-column-del, .mat-column-select {
+    pointer-events: none;
 }
 
 .mat-column-del {
-    pointer-events: none;
+    width: 20px;
 }
-.mat-column-del i{
+
+.mat-column-del i, mat-checkbox{
     pointer-events: all;
 }
 
@@ -22,11 +19,34 @@ tr.cdk-row:hover {
     cursor: pointer;
 }
 
-label.mat-form-field-label {
-    color : #00b5ad;
+
+
+mat-row mat-cell:last-child, mat-header-cell:last-child {
+    
+    max-width: 30px;
+    display: flex;
+    justify-content: center;
 }
 
-.mat-input-element {
-    caret-color: #00b5ad;
+mat-cell span {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+
+table {
+    width: 100%;
+}
+
+.delete-selection-button {
+    margin-top: 0px;
+    margin-bottom: 1.25em;
+}
+
+.form-controllers {
+    display: flex;
+    justify-content: space-between;
 }
 

@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { SingleCustomerRoutingModule } from './single-customer-routing.module';
 import { SingleCustomerComponent } from '../../customer-list/single-customer/single-customer.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule} from '@angular/material/icon';
+
 
 
 @NgModule({
@@ -11,7 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     CommonModule,
     SingleCustomerRoutingModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ]
 })
 export class SingleCustomerModule { }

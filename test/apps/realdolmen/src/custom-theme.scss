@@ -9,10 +9,45 @@
 // Be sure that you only ever include this mixin once!
 @include mat-core();
 
+$md-realdolmen: (
+    50 : #e0f6f5,
+    100 : #b3e9e6,
+    200 : #80dad6,
+    300 : #4dcbc6,
+    400 : #26c0b9,
+    500 : #00b5ad,
+    600 : #00aea6,
+    700 : #00a59c,
+    800 : #009d93,
+    900 : #008d83,
+    A100 : #b9fff9,
+    A200 : #86fff5,
+    A400 : #53fff0,
+    A700 : #3affee,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$realdolmen-primary: mat-palette($mat-indigo);
+$realdolmen-primary: mat-palette($md-realdolmen);
 $realdolmen-accent: mat-palette($mat-pink, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
@@ -27,6 +62,10 @@ $realdolmen-theme: mat-light-theme((
     warn: $realdolmen-warn,
   )
 ));
+
+
+
+
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component

@@ -35,4 +35,20 @@ export class SingleCustomerComponent implements OnInit {
     this.router.navigate(['/customer','edit' , this.customer.id]);
   }
 
+  getPhotoUrl() {
+    if (this.customer.photo) {
+      return this.customer.photo;
+    }
+    else if( this.customer.gender == "female"){
+      return './assets/images/woman-placeholder.jpg';
+    }
+    else {
+      return './assets/images/man-placeholder.jpg';
+    }
+  }
+
+  getDate(date : number) {
+    return  new Date(date).toLocaleDateString();
+  }
+
 }

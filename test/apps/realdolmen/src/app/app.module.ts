@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomerListModule } from './modules/customer-list/customer-list.module';
 import { SingleCustomerModule } from './modules/single-customer/single-customer.module';
 import { CustomerFormModule } from './modules/customer-form/customer-form.module';
+import { MatIconModule} from "@angular/material/icon";
 
 
 const appRoutes : Routes  = [
@@ -34,7 +35,8 @@ const appRoutes : Routes  = [
             BrowserAnimationsModule,
             CustomerListModule,
             SingleCustomerModule,
-            CustomerFormModule
+            CustomerFormModule,
+            MatIconModule
   ],
   providers: [CustomersService],
   bootstrap: [AppComponent],

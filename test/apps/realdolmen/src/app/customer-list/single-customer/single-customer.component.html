@@ -1,8 +1,95 @@
-<div>
-    <div class="img-container"><img [src]="customer.photo" *ngIf="customer.photo"></div>
-    <h1>{{customer.email}}</h1>
-    <h1>{{customer.name}}</h1>
-    <h1>{{customer.lastname}}</h1>
-    <button mat-raised-button color="primary" (click)="onBack()">Back</button>
-    <button mat-raised-button color="primary" (click)="onEdit()">Edit</button>
+<div class="single-customer">
+    <h2>Customer</h2>
+    <div class="content">
+        <div class="img-container"><img [src]="getPhotoUrl()"></div>
+        <div class="infos">
+            <div class="name">
+                <div class="text-main">
+                    <div class="firstname text-with-label">
+                        <h3> {{customer.name}}</h3>
+                        <span class="label-container">
+                            <label class="mat-form-field-label">Name</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="text-main">
+                    <div class="lastname text-with-label">
+                        <h3> {{customer.lastname}}</h3>
+                        <span class="label-container">
+                            <label class="mat-form-field-label">Lastname</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-main">
+                <div class="email text-with-label">
+                    <h3><a [href]='"mailto:"+customer.email'> {{customer.email}}</a></h3>
+                    <span class="label-container">
+                        <label class="mat-form-field-label">Email</label>
+                    </span>
+                </div>
+            </div>
+            <div class="gender-birthday">
+                <div *ngIf="customer.birthday" class="text-main">
+                    <div class="birthday text-with-label">
+                        <h3> {{getDate(customer.birthday)}}</h3>
+                        <span class="label-container">
+                            <label class="mat-form-field-label">Birthday</label>
+                        </span>
+                    </div>
+                </div>
+                <div *ngIf="customer.gender" class="text-main">
+                    <div class="gender text-with-label">
+                        <h3> {{customer.gender}}</h3>
+                        <span class="label-container">
+                            <label class="mat-form-field-label">Gender</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="customer.phone" class="text-main">
+                <div class="phone text-with-label">
+                    <h3><a [href]='"tel:"+customer.phone'> {{customer.phone}}</a></h3>
+                    <span class="label-container">
+                        <label class="mat-form-field-label">Telephone</label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="availability-interests">
+                <div class="availability">
+                    <label>Availability :</label>
+                    <div class="element-availability-interests">
+                    <span class="material-icons" >
+                        radio_button_checked
+                        </span>{{customer.availability}}
+                    </div>
+                </div>
+                <div  *ngIf="customer.interests" class="interests">
+                    <label>Interests :</label>
+                    <div  *ngFor="let interest of customer.interests;" class="interets-elements">
+                    <div  *ngIf="interest.interested" class="element-availability-interests">
+                        <mat-icon  class="material-icons" fontSet="material-icons-sharp">
+                            check_box_sharp
+                            </mat-icon >{{interest.name}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf='customer.description' class="text-main">
+                <div class="email text-with-label">
+                    <p> {{customer.description}}<p>
+                    <span class="label-container">
+                        <label class="mat-form-field-label">Description</label>
+                    </span>
+                </div>
+            </div>
+            
+        </div>    
+    </div>
+    <div class="button">
+        <button mat-raised-button color="primary" (click)="onBack()">Back</button>
+        <button mat-raised-button color="primary" (click)="onEdit()">Edit</button>
+    </div>
 </div>

@@ -79,6 +79,13 @@ export class CustomersService {
     this.emitCustomers();
   }
 
+  removeMultipleCustomer(customers : Customer[]) {
+    customers.forEach(customer => {
+      firebase.database().ref('customers/'+customer.id).remove();
+    })
+    this.emitCustomers();
+  }
+
   uploadFile(file : File) {
     return new Promise(
       (resolve,reject) => {
