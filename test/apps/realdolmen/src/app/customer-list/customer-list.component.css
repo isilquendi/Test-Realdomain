@@ -64,3 +64,38 @@ table {
     justify-content: space-between;
 }
 
+
+@media screen and (max-width: 767px) {
+    .form-controllers {
+        flex-direction: column;
+        
+    }
+    .mat-column-creationDate  {
+        display: none;
+    }
+
+    .mat-column-modificationDate  {
+        display: none;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .addCustomer {
+        margin-bottom: 20px;
+    }
+
+   
+    
+}
+
+@media screen and (max-width: 426px) {
+    .mat-column-email  {
+        display: none;
+    }
+}
+
+
+
+

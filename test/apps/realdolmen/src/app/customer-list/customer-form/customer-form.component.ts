@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CustomersService } from '../../services/customers.service';
 import { Customer } from '../../models/customer.model';
 import { DateAdapter,MAT_DATE_LOCALE } from '@angular/material/core';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -44,13 +45,19 @@ export class CustomerFormComponent implements OnInit {
               private customerService : CustomersService,
               private router : Router,
               private route : ActivatedRoute,
-              private _adapter: DateAdapter<any> ) { }
+              private _adapter: DateAdapter<any>,
+              private titleService: Title
+               ) { }
 
   ngOnInit(): void {
+
+
+
     this._adapter.setLocale('gb');
     if (this.route.snapshot.params['id']) {
       this.customer= new Customer('','','');
       this.isEdit = true;
+      this.titleService.setTitle('Edit Customer');
       const id = this.route.snapshot.params['id'];
       this.customerService.getSingleCustomer(id).then(
         (customer : Customer) => {
@@ -71,6 +78,10 @@ export class CustomerFormComponent implements OnInit {
           this.onValueChanges();
         }
       );
+    }
+
+    else {
+      this.titleService.setTitle('Add Customer');
     }
    
     this.initForm();

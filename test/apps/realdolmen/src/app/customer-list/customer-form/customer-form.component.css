@@ -104,3 +104,60 @@ mat-radio-button {
     justify-content: space-between;
     max-width: 590px;
 }
+
+
+
+@media screen and (max-width: 767px) {
+    .form-group {
+        flex-direction: column;
+        
+        align-items: center;
+    }
+    .main-form {
+        width: 100%;
+    }
+
+    .name {
+        flex-direction: column;
+        
+    }
+    .name > mat-form-field {
+       width: 100%;
+       flex-grow: 1;
+       padding-left: 0 !important;
+       padding-right: 0 !important;
+    }
+
+    .photo {
+        margin: 0;
+        width: 100%;
+       
+        align-items: center;
+        margin-bottom: 20px;
+        
+    }
+
+    .gender-birthday {
+        flex-direction: column;
+
+    }
+
+    .gender-birthday mat-form-field {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        width: 100%;
+        max-width: 100% !important;
+    }
+
+    .button {
+        flex-direction: column;
+       
+
+    }
+
+     button {
+        width: 100%;
+        margin-bottom: 10px;
+    } 
+
+}

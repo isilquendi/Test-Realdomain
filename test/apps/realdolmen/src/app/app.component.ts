@@ -1,5 +1,6 @@
 import { Component,HostBinding } from '@angular/core';
 import firebase from "firebase/app";
+import {Title} from "@angular/platform-browser";
 import "firebase/analytics";
 
 
@@ -12,7 +13,7 @@ import "firebase/analytics";
 export class AppComponent {
   @HostBinding('class') className = '';
   title = 'realdolmen';
-  constructor() {
+  constructor(private titleService: Title) {
   var firebaseConfig = {
     apiKey: "AIzaSyDPkSGWPXLtrMVS1XuSP2mCdwMFEUPP-hA",
     authDomain: "realdolmen-10996.firebaseapp.com",
@@ -26,11 +27,9 @@ export class AppComponent {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   
-  }
-  
+  } 
 
-  childToParent(name){
+  setDarkMode(name){
     this.className = name;
-    
   }
 }

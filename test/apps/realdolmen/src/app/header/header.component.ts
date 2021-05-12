@@ -9,13 +9,14 @@ import { FormControl } from '@angular/forms';
 })
 export class HeaderComponent implements OnInit {
  
-  @Output() childToParent = new EventEmitter<String>();
+  @Output() setDarkMode = new EventEmitter<String>();
   constructor(private overlay: OverlayContainer) { }
   toggleControl = new FormControl(false);
+  menuToggle = false;
   ngOnInit(): void {
     this.toggleControl.valueChanges.subscribe((darkMode) => {
       const darkClassName = 'darkMode';
-      this.childToParent.emit( darkMode ? darkClassName : '');
+      this.setDarkMode.emit( darkMode ? darkClassName : '');
       if (darkMode) {
         this.overlay.getContainerElement().classList.add(darkClassName);
       } else {
@@ -23,6 +24,13 @@ export class HeaderComponent implements OnInit {
       }
       
     });
+  }
+
+  menuUpdate() {
+    if(this.menuToggle) {
+      this.menuToggle=false;
+    }
+    else this.menuToggle=true;
   }
 
 }

@@ -11,7 +11,8 @@ var core_1 = require("@angular/core");
 var app_1 = require("firebase/app");
 require("firebase/analytics");
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+    function AppComponent(titleService) {
+        this.titleService = titleService;
         this.className = '';
         this.title = 'realdolmen';
         var firebaseConfig = {
@@ -27,7 +28,7 @@ var AppComponent = /** @class */ (function () {
         // Initialize Firebase
         app_1["default"].initializeApp(firebaseConfig);
     }
-    AppComponent.prototype.childToParent = function (name) {
+    AppComponent.prototype.setDarkMode = function (name) {
         this.className = name;
     };
     __decorate([

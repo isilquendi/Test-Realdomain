@@ -12,14 +12,15 @@ var forms_1 = require("@angular/forms");
 var HeaderComponent = /** @class */ (function () {
     function HeaderComponent(overlay) {
         this.overlay = overlay;
-        this.childToParent = new core_1.EventEmitter();
+        this.setDarkMode = new core_1.EventEmitter();
         this.toggleControl = new forms_1.FormControl(false);
+        this.menuToggle = false;
     }
     HeaderComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.toggleControl.valueChanges.subscribe(function (darkMode) {
             var darkClassName = 'darkMode';
-            _this.childToParent.emit(darkMode ? darkClassName : '');
+            _this.setDarkMode.emit(darkMode ? darkClassName : '');
             if (darkMode) {
                 _this.overlay.getContainerElement().classList.add(darkClassName);
             }
@@ -28,9 +29,16 @@ var HeaderComponent = /** @class */ (function () {
             }
         });
     };
+    HeaderComponent.prototype.menuUpdate = function () {
+        if (this.menuToggle) {
+            this.menuToggle = false;
+        }
+        else
+            this.menuToggle = true;
+    };
     __decorate([
         core_1.Output()
-    ], HeaderComponent.prototype, "childToParent");
+    ], HeaderComponent.prototype, "setDarkMode");
     HeaderComponent = __decorate([
         core_1.Component({
             selector: 'test-header',

@@ -1,6 +1,9 @@
-<nav class="navbar">
+<nav [className]="menuToggle ? 'navbar open' : 'navbar'">
+    <div class="menu"><mat-icon class="material-icons" color="primary" (click)="menuUpdate()">
+        menu
+        </mat-icon></div>
     <ul>
-        <li routerLinkActive="active">
+        <li routerLinkActive="active" (click)="menuUpdate()">
             <a routerLink="dashboard">
                 <mat-icon aria-hidden="false">
                     home
@@ -8,7 +11,7 @@
                 Dashboard
             </a>
         </li>
-        <li routerLinkActive="active">
+        <li routerLinkActive="active" (click)="menuUpdate()">
             <a routerLink="customer">
                 <mat-icon aria-hidden="false">
                     people

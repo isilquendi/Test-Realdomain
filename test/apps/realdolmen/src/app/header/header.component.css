@@ -41,7 +41,7 @@ nav ul li.active a {
     background-color: rgba(256,256,256,0.3) ;
 }
 
-mat-icon {
+nav ul mat-icon {
     padding-right: 5px;
 }
 
@@ -55,3 +55,79 @@ nav ul li a:hover {
 ::ng-deep .darkMode nav ul li a:hover {
     color: #2196f3 !important;
 }
+
+.menu {
+    display: none;
+}
+
+@media screen and (max-width: 1023px) {
+    .menu {
+        display: block;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 40px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-right: 20px;
+    }
+
+    .menu mat-icon {
+        font-size: 30px;
+    }
+
+    
+
+    .menu .mat-icon {
+        width: auto;
+        height: auto;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    nav {
+        position: fixed;
+        left: -200px;
+        top: 0;
+        transition: left 0.2s linear;
+        z-index: 1;
+        box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
+    }
+
+    nav.open {
+        
+        left: 0;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .content{
+        padding-top: 40px;
+    }
+    nav {
+        width: 100%;
+        left: -100%;
+    }
+
+    .menu {
+        background-color: #00b5ad;
+        width: 100%;
+    }
+
+    .menu mat-icon{
+        color: white;
+    }
+
+    ::ng-deep .darkMode .menu {
+        background-color: #2196f3;
+    }
+
+    nav ul {
+        padding-top : 40px
+    }
+
+
+}
+  
+  

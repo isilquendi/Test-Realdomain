@@ -14,6 +14,7 @@ import { CustomerFormModule } from './modules/customer-form/customer-form.module
 import { MatIconModule} from "@angular/material/icon";
 import { MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { Title } from '@angular/platform-browser';
 
 const appRoutes : Routes  = [
   {path : 'dashboard', component : DashboardComponent },
@@ -41,7 +42,7 @@ const appRoutes : Routes  = [
             MatToolbarModule,
 
   ],
-  providers: [CustomersService],
+  providers: [CustomersService,Title],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from '../../models/customer.model';
 import { CustomersService } from '../../services/customers.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'test-single-customer',
@@ -12,9 +13,12 @@ export class SingleCustomerComponent implements OnInit {
   customer : Customer;
   constructor(private route : ActivatedRoute,
               private customerService : CustomersService,
-              private router : Router) { }
+              private router : Router,
+              private titleService: Title
+              ) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle('View Customer');
     this.customer = new Customer('','','');
     const id = this.route.snapshot.params['id'];
     this.customerService.getSingleCustomer(id).then(

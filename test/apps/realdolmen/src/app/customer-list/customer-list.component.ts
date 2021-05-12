@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import {  MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -26,11 +27,12 @@ export class CustomerListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   loading = true;
 
-  constructor(private customersService : CustomersService, private router: Router) { 
+  constructor(private customersService : CustomersService, private router: Router, private titleService: Title) { 
     
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle('List Customers');
     this.customerSubscription =this.customersService.customersSubject.subscribe(
       (customers : Customer[]) => {
         console.log(customers.length);
