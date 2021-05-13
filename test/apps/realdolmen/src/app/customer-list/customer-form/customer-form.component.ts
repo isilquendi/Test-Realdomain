@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CustomersService } from '../../services/customers.service';
 import { Customer } from '../../models/customer.model';
-import { DateAdapter,MAT_DATE_LOCALE } from '@angular/material/core';
 import { Title } from '@angular/platform-browser';
+import {TranslateService, LangChangeEvent} from '@ngx-translate/core';
 
 
 @Component({
   selector: 'test-customer-form',
   templateUrl: './customer-form.component.html',
   styleUrls: ['./customer-form.component.css'],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }]
 })
 export class CustomerFormComponent implements OnInit {
   customer : Customer;
@@ -21,6 +20,8 @@ export class CustomerFormComponent implements OnInit {
   fileIsUploading = false;
   fileUrl : string;
   fileUploaded = false;
+  male = "Male";
+  female ="Female";
   
   isEdit = false;
 
@@ -45,16 +46,32 @@ export class CustomerFormComponent implements OnInit {
               private customerService : CustomersService,
               private router : Router,
               private route : ActivatedRoute,
-              private _adapter: DateAdapter<any>,
-              private titleService: Title
+              private titleService: Title,
+              private translate: TranslateService
                ) { }
 
   ngOnInit(): void {
-    this._adapter.setLocale('gb');
+
+    
+    this.translate.onLangChange.subscribe((e : LangChangeEvent)=> {
+      /**hack to prevent the ExpressionChangedAfterItHasBeenCheckedError on the mat-select */
+      const genderTemp = this.customerForm.get('gender').value;
+      this.customerForm.controls['gender'].setValue('');
+      setTimeout(() => {
+        this.customerForm.controls['gender'].setValue(genderTemp);
+      }, 1);
+
+
+      
+    })
+    
+
     if (this.route.snapshot.params['id']) {
       this.customer= new Customer('','','');
       this.isEdit = true;
-      this.titleService.setTitle('Edit Customer');
+      this.translate.stream('customers.edit').subscribe((value) => {
+        this.titleService.setTitle(value)
+      }) ;
       const id = this.route.snapshot.params['id'];
       this.customerService.getSingleCustomer(id).then(
         (customer : Customer) => {
@@ -78,12 +95,16 @@ export class CustomerFormComponent implements OnInit {
     }
 
     else {
-      this.titleService.setTitle('Add Customer');
+      this.translate.stream('customers.add').subscribe((value) => {
+        this.titleService.setTitle(value)
+      }) ;
     }
-   
+
     this.initForm();
     this.onValueChanges();
   }
+
+ 
 
   initForm() {
     this.customerForm = this.formbuilder.group({
@@ -97,6 +118,8 @@ export class CustomerFormComponent implements OnInit {
       availability : [this.customer && this.customer.availability ? this.customer.availability : 'Full-Time', [Validators.required]]
     }) 
   }
+
+ 
 
   onSaveCustomer() {
     const email = this.customerForm.get('email').value;
@@ -115,6 +138,12 @@ export class CustomerFormComponent implements OnInit {
 
     if(this.fileUrl && this.fileUrl != '') {
       newCustomer.photo = this.fileUrl;
+      
+    }
+
+    else if(this.customer && this.customer.photo ) {
+      newCustomer.photo = this.customer.photo;
+      
     }
 
     if(birthday != '') {

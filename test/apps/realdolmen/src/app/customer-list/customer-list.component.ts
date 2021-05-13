@@ -8,6 +8,8 @@ import {  MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Title } from '@angular/platform-browser';
+import {TranslateService} from '@ngx-translate/core';
+
 
 
 @Component({
@@ -27,21 +29,29 @@ export class CustomerListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   loading = true;
 
-  constructor(private customersService : CustomersService, private router: Router, private titleService: Title) { 
+  constructor(private customersService : CustomersService,
+              private translate: TranslateService,
+              private router: Router,
+              private titleService: Title
+              ) { 
     
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle('List Customers');
+    
+     /** Set the Title */
+    this.translate.stream('customers.list').subscribe((value) => {
+      this.titleService.setTitle(value)
+    }) ;
+    
+
     this.customerSubscription =this.customersService.customersSubject.subscribe(
       (customers : Customer[]) => {
-        console.log(customers.length);
         if(customers.length > 0) {
           this.loading=false;  
         }
         this.customers = customers;
         this.dataSource = new MatTableDataSource(customers);
-        
         this.sortCustomer();
         
       }
@@ -102,7 +112,10 @@ export class CustomerListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getDate(date : number) {
-    return  new Date(date).toLocaleString();
+    if(this.translate.currentLang)
+      return  new Date(date).toLocaleString(this.translate.currentLang);
+    else 
+      return  new Date(date).toLocaleString('en');
   }
   isAllSelected() {
     const numSelected = this.selection.selected.length;

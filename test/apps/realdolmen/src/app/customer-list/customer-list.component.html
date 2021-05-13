@@ -3,13 +3,13 @@
 </div>
 
 <div class="container">
-    <h2>Customers</h2>
+    <h2>{{ 'customers.title' | translate }}</h2>
     <div class="form-controllers">
         <mat-form-field>
-            <mat-label>Search</mat-label>
+            <mat-label>{{ 'search' | translate }}</mat-label>
             <input  matInput (keyup)="applyFilter($event)" #input>
         </mat-form-field>
-        <button mat-raised-button class ="delete-selection-button" color="primary" (click)="deleteSelection()" [disabled]='this.selection.selected.length == 0'>Delete Selection</button>
+        <button mat-raised-button class ="delete-selection-button" color="primary" (click)="deleteSelection()" [disabled]='this.selection.selected.length == 0'>{{'deleteSeclection' | translate}}</button>
     </div>
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" matSort >
@@ -34,27 +34,27 @@
             </ng-container>
 
             <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'name' | translate }}</th>
                 <td mat-cell *matCellDef="let element," > {{element.name}} </td>
             </ng-container>
 
             <ng-container matColumnDef="lastname">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Lastname </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'lastname' | translate }}</th>
                 <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
             </ng-container>
 
             <ng-container matColumnDef="email">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'email' | translate}}</th>
                 <td mat-cell *matCellDef="let element">{{element.email}}</td>
             </ng-container>
 
             <ng-container matColumnDef="creationDate">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Creation Date </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'creationDate' | translate}}</th>
                 <td mat-cell *matCellDef="let element"> {{getDate(element.creationDate)}} </td>
             </ng-container>
             
             <ng-container matColumnDef="modificationDate">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Modifiction Date </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'modificationDate' | translate}}</th>
                 <td mat-cell *matCellDef="let element"> {{getDate(element.modificationDate)}} </td>
             </ng-container>
         
@@ -67,9 +67,9 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onViewCustomer(row.id)"></tr>   
         </table>
     
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons ></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons itemsPerPageLabel="test"></mat-paginator>
     </div>
-    <button mat-raised-button color="primary" (click)="onNewCustomer()" class="addCustomer">Add Customer</button>
+    <button mat-raised-button color="primary" (click)="onNewCustomer()" class="addCustomer">{{'customers.add' | translate}}</button>
     
 </div>
 

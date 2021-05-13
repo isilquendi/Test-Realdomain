@@ -10,17 +10,18 @@ exports.CustomerFormComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var customer_model_1 = require("../../models/customer.model");
-var core_2 = require("@angular/material/core");
 var CustomerFormComponent = /** @class */ (function () {
-    function CustomerFormComponent(formbuilder, customerService, router, route, _adapter, titleService) {
+    function CustomerFormComponent(formbuilder, customerService, router, route, titleService, translate) {
         this.formbuilder = formbuilder;
         this.customerService = customerService;
         this.router = router;
         this.route = route;
-        this._adapter = _adapter;
         this.titleService = titleService;
+        this.translate = translate;
         this.fileIsUploading = false;
         this.fileUploaded = false;
+        this.male = "Male";
+        this.female = "Female";
         this.isEdit = false;
         this.maxDate = new Date(Date.now());
         this.interests = [
@@ -35,11 +36,20 @@ var CustomerFormComponent = /** @class */ (function () {
     }
     CustomerFormComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this._adapter.setLocale('gb');
+        this.translate.onLangChange.subscribe(function (e) {
+            /**hack to prevent the ExpressionChangedAfterItHasBeenCheckedError on the mat-select */
+            var genderTemp = _this.customerForm.get('gender').value;
+            _this.customerForm.controls['gender'].setValue('');
+            setTimeout(function () {
+                _this.customerForm.controls['gender'].setValue(genderTemp);
+            }, 1);
+        });
         if (this.route.snapshot.params['id']) {
             this.customer = new customer_model_1.Customer('', '', '');
             this.isEdit = true;
-            this.titleService.setTitle('Edit Customer');
+            this.translate.stream('customers.edit').subscribe(function (value) {
+                _this.titleService.setTitle(value);
+            });
             var id = this.route.snapshot.params['id'];
             this.customerService.getSingleCustomer(id).then(function (customer) {
                 if (customer) {
@@ -60,7 +70,9 @@ var CustomerFormComponent = /** @class */ (function () {
             });
         }
         else {
-            this.titleService.setTitle('Add Customer');
+            this.translate.stream('customers.add').subscribe(function (value) {
+                _this.titleService.setTitle(value);
+            });
         }
         this.initForm();
         this.onValueChanges();
@@ -91,6 +103,9 @@ var CustomerFormComponent = /** @class */ (function () {
         }
         if (this.fileUrl && this.fileUrl != '') {
             newCustomer.photo = this.fileUrl;
+        }
+        else if (this.customer && this.customer.photo) {
+            newCustomer.photo = this.customer.photo;
         }
         if (birthday != '') {
             newCustomer.birthday = new Date(birthday).getTime();
@@ -187,8 +202,7 @@ var CustomerFormComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'test-customer-form',
             templateUrl: './customer-form.component.html',
-            styleUrls: ['./customer-form.component.css'],
-            providers: [{ provide: core_2.MAT_DATE_LOCALE, useValue: 'en-GB' }]
+            styleUrls: ['./customer-form.component.css']
         })
     ], CustomerFormComponent);
     return CustomerFormComponent;

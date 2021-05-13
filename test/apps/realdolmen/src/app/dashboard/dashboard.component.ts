@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable} from 'rxjs';
 import { Title } from '@angular/platform-browser';
+import {TranslateService} from '@ngx-translate/core';
+
+
 
 @Component({
   selector: 'test-dashboard',
@@ -7,11 +11,26 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
-  constructor(private titleService: Title) { }
-
+  public prout: Observable<string>;
+  constructor(private titleService: Title,
+              private translate: TranslateService
+    ) {
+    
+    
+   }
+  
   ngOnInit(): void {
-    this.titleService.setTitle('Dashbord');
+    this.translate.stream('dashboard.title').subscribe((value) => {
+      this.titleService.setTitle(value)
+    }) ;
+  
   }
 
-}
+  
+
+ 
+
+ 
+  }
+
+

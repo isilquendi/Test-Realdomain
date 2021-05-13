@@ -1,11 +1,11 @@
 <div>
-    <h2 *ngIf=(!isEdit)>New Customer</h2>
-    <h2 *ngIf=(isEdit)>Edit Customer</h2>
+    <h2 *ngIf=(!isEdit)>{{ 'customers.new' | translate }}</h2>
+    <h2 *ngIf=(isEdit)>{{ 'customers.edit' | translate }}</h2>
     <form [formGroup]="customerForm" (ngSubmit)="onSaveCustomer()">
         <div class="form-group">
             <div class="photo">
                 <img  [src]="getPhotoUrl()" border-color="primary">
-                <button type="button" mat-raised-button color="primary" (click)="fileInput.click()" [disabled]="fileIsUploading">Choose File</button>
+                <button type="button" mat-raised-button color="primary" (click)="fileInput.click()" [disabled]="fileIsUploading">{{ 'chooseFile' | translate }}</button>
                 <input  hidden #fileInput   type="file" (change)="detectFiles($event)" accept="images/*">
                 <p *ngIf="fileUploaded">File Uploaded !</p>
             </div>
@@ -13,18 +13,18 @@
             <div class="main-form">
                 <div class="name">
                     <mat-form-field> 
-                        <mat-label>Name</mat-label>
+                        <mat-label>{{ 'name' | translate }}</mat-label>
                         <input matInput type="text" id="name" formControlName="name" required>
                     </mat-form-field>
 
                     <mat-form-field>
-                        <mat-label>Lastname</mat-label>
+                        <mat-label>{{ 'lastname' | translate }}</mat-label>
                         <input matInput type="text" id="lastname" formControlName="lastname" required>
                     </mat-form-field>
                 </div>
 
                 <mat-form-field class="example-full-width">
-                    <mat-label>Email</mat-label>
+                    <mat-label>{{'email' | translate}}</mat-label>
                     <input matInput  type="email" id="email" formControlName="email" email required>    
                     <mat-error *ngIf="customerForm.controls.email.invalid">Email not valid</mat-error>
                 </mat-form-field>
@@ -32,7 +32,7 @@
                 <div class="gender-birthday">
 
                 <mat-form-field (click)="picker.open()">
-                    <mat-label>Birthday</mat-label >
+                    <mat-label>{{'birthday' | translate}}</mat-label >
                     <input matInput [matDatepicker]="picker" id="birthday" formControlName="birthday" [max]="maxDate">
                     <mat-datepicker-toggle  matSuffix  [for]="picker" ></mat-datepicker-toggle>
                     <mat-datepicker #picker disabled="false"></mat-datepicker>
@@ -40,17 +40,17 @@
                 
 
                 <mat-form-field>
-                    <mat-label>Gender</mat-label>
+                    <mat-label>{{'gender' | translate}}</mat-label>
                     <mat-select id="gender" formControlName="gender">
-                    <mat-option value="male">Male</mat-option>
-                    <mat-option value="female">Female</mat-option>
+                    <mat-option value="male">{{ 'male' | translate }}</mat-option>
+                    <mat-option value="female">{{ 'female' | translate }}</mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 </div>
 
                 <mat-form-field>
-                    <mat-label>Telephone</mat-label>
+                    <mat-label>{{'telephone' | translate}}</mat-label>
                     <input type="tel" matInput placeholder="555-555-1234"  id="phone" formControlName="phone" required>
                     <mat-icon matSuffix>mode_edit</mat-icon>
 
@@ -58,16 +58,16 @@
 
                 <div class='availability-interests'>
                     <div class='customer-availability'>
-                        <label>Availability :</label>
+                        <label>{{'availability' | translate}} :</label>
                         <mat-radio-group aria-label="example-radio-group-label" required id='availability' formControlName='availability'>
                             <mat-radio-button  *ngFor="let availability of availabilities" [value]="availability" color='primary' (change)='udpateRadio($event)'>
-                                {{availability}}
+                                {{availability | translate}}
                             </mat-radio-button>
                         </mat-radio-group>
                     </div>
                 
                     <div class='customer-interests'>
-                        <label>Interests :</label>
+                        <label>{{'interests' | translate}} :</label>
                         <ul>
                         <li *ngFor="let interest of interests">
                                 <mat-checkbox [id]="interest.name" [checked]='interest.interested' color='primary' (change)='updateCheckbox($event)'>                                
@@ -80,15 +80,15 @@
 
 
                 <mat-form-field class="description">
-                    <mat-label>Description</mat-label>
+                    <mat-label>{{'description' | translate}}</mat-label>
                     <textarea matInput type="text" id="description"  formControlName="description"></textarea>
                 </mat-form-field>
             </div>
         </div>
        
         <div class="button">
-            <button mat-raised-button color="primary" (click)="onBack()">Back</button>
-            <button mat-raised-button color="primary" [disabled]="customerForm.invalid || fileIsUploading" type="Submit">Save</button>
+            <button mat-raised-button color="primary" (click)="onBack()">{{'back' | translate}}</button>
+            <button mat-raised-button color="primary" [disabled]="customerForm.invalid || fileIsUploading" type="Submit">{{'save' | translate}}</button>
         </div>
     </form>
 </div>

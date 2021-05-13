@@ -13,8 +13,9 @@ var sort_1 = require("@angular/material/sort");
 var paginator_1 = require("@angular/material/paginator");
 var table_1 = require("@angular/material/table");
 var CustomerListComponent = /** @class */ (function () {
-    function CustomerListComponent(customersService, router, titleService) {
+    function CustomerListComponent(customersService, translate, router, titleService) {
         this.customersService = customersService;
+        this.translate = translate;
         this.router = router;
         this.titleService = titleService;
         this.displayedColumns = ['select', 'name', 'lastname', 'email', 'creationDate', 'modificationDate', 'del'];
@@ -24,9 +25,11 @@ var CustomerListComponent = /** @class */ (function () {
     }
     CustomerListComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.titleService.setTitle('List Customers');
+        /** Set the Title */
+        this.translate.stream('customers.list').subscribe(function (value) {
+            _this.titleService.setTitle(value);
+        });
         this.customerSubscription = this.customersService.customersSubject.subscribe(function (customers) {
-            console.log(customers.length);
             if (customers.length > 0) {
                 _this.loading = false;
             }
@@ -70,7 +73,10 @@ var CustomerListComponent = /** @class */ (function () {
         this.sortCustomer();
     };
     CustomerListComponent.prototype.getDate = function (date) {
-        return new Date(date).toLocaleString();
+        if (this.translate.currentLang)
+            return new Date(date).toLocaleString(this.translate.currentLang);
+        else
+            return new Date(date).toLocaleString('en');
     };
     CustomerListComponent.prototype.isAllSelected = function () {
         var numSelected = this.selection.selected.length;

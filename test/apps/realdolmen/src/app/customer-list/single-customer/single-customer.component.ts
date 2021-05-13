@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from '../../models/customer.model';
 import { CustomersService } from '../../services/customers.service';
 import { Title } from '@angular/platform-browser';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'test-single-customer',
@@ -14,31 +15,42 @@ export class SingleCustomerComponent implements OnInit {
   constructor(private route : ActivatedRoute,
               private customerService : CustomersService,
               private router : Router,
-              private titleService: Title
+              private titleService: Title,
+              private translate: TranslateService
               ) { }
 
   ngOnInit(): void {
-    this.titleService.setTitle('View Customer');
+
+    /** Set the Title */
+    this.translate.stream('customers.single').subscribe((value) => {
+      this.titleService.setTitle(value)
+    }) ;
+    
+    /** Get the Customer by getting ths ID on the route parameter*/
     this.customer = new Customer('','','');
     const id = this.route.snapshot.params['id'];
     this.customerService.getSingleCustomer(id).then(
       (customer : Customer) => {
+
         if(customer) this.customer = customer;
+
+        /** If the ID doesn't exist return to the Customer List */
         else this.router.navigate(['/customer']);
-      },
-      
+      },  
     );
   }
 
+  /** Return to Customer List */
   onBack() {
     this.router.navigate(['/customer']);
   }
 
+  /** Edit the Customer */
   onEdit() {
-    
     this.router.navigate(['/customer','edit' , this.customer.id]);
   }
 
+  /** Get the photo and if not photo display the dummy with gender considaration */
   getPhotoUrl() {
     if (this.customer.photo) {
       return this.customer.photo;
@@ -51,8 +63,12 @@ export class SingleCustomerComponent implements OnInit {
     }
   }
 
+  /** Set the date display considering the language */
   getDate(date : number) {
-    return  new Date(date).toLocaleDateString();
+    if(this.translate.currentLang)
+      return  new Date(date).toLocaleDateString(this.translate.currentLang);
+    else 
+      return  new Date(date).toLocaleDateString('en');
   }
 
 }

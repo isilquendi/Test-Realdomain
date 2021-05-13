@@ -1,6 +1,8 @@
 import { Component,OnInit, Output , EventEmitter } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { FormControl } from '@angular/forms';
+import {TranslateService} from '@ngx-translate/core';
+
 
 @Component({
   selector: 'test-header',
@@ -10,8 +12,9 @@ import { FormControl } from '@angular/forms';
 export class HeaderComponent implements OnInit {
  
   @Output() setDarkMode = new EventEmitter<String>();
-  constructor(private overlay: OverlayContainer) { }
+  constructor(private overlay: OverlayContainer, private translate: TranslateService) { }
   toggleControl = new FormControl(false);
+  languageControl = new FormControl();
   menuToggle = false;
   ngOnInit(): void {
     this.toggleControl.valueChanges.subscribe((darkMode) => {
@@ -23,6 +26,9 @@ export class HeaderComponent implements OnInit {
         this.overlay.getContainerElement().classList.remove(darkClassName);
       }
       
+    });
+    this.languageControl.valueChanges.subscribe((value) => {
+      this.translate.use(value);
     });
   }
 

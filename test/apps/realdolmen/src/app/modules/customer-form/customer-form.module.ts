@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule} from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   declarations: [CustomerFormComponent],
@@ -32,7 +33,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatIconModule,
     MatCheckboxModule,
     MatRadioModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    TranslateModule.forChild()
   ]
 })
 export class CustomerFormModule { }

@@ -10,10 +10,12 @@ exports.HeaderComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var HeaderComponent = /** @class */ (function () {
-    function HeaderComponent(overlay) {
+    function HeaderComponent(overlay, translate) {
         this.overlay = overlay;
+        this.translate = translate;
         this.setDarkMode = new core_1.EventEmitter();
         this.toggleControl = new forms_1.FormControl(false);
+        this.languageControl = new forms_1.FormControl();
         this.menuToggle = false;
     }
     HeaderComponent.prototype.ngOnInit = function () {
@@ -27,6 +29,9 @@ var HeaderComponent = /** @class */ (function () {
             else {
                 _this.overlay.getContainerElement().classList.remove(darkClassName);
             }
+        });
+        this.languageControl.valueChanges.subscribe(function (value) {
+            _this.translate.use(value);
         });
     };
     HeaderComponent.prototype.menuUpdate = function () {

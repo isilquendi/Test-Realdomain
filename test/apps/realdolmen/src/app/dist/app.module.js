@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
-exports.AppModule = void 0;
+exports.HttpLoaderFactory = exports.AppModule = void 0;
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var app_component_1 = require("./app.component");
@@ -23,7 +23,14 @@ var customer_form_module_1 = require("./modules/customer-form/customer-form.modu
 var icon_1 = require("@angular/material/icon");
 var slide_toggle_1 = require("@angular/material/slide-toggle");
 var toolbar_1 = require("@angular/material/toolbar");
+var button_toggle_1 = require("@angular/material/button-toggle");
 var platform_browser_2 = require("@angular/platform-browser");
+var core_2 = require("@ngx-translate/core");
+var http_loader_1 = require("@ngx-translate/http-loader");
+var translate_paginator_service_1 = require("./services/translate-paginator.service");
+var paginator_1 = require("@angular/material/paginator");
+var translate_datepicker_service_1 = require("./services/translate-datepicker.service");
+var datepicker_1 = require("@angular/material/datepicker");
 var appRoutes = [
     { path: 'dashboard', component: dashboard_component_1.DashboardComponent },
     { path: 'customer', loadChildren: function () { return Promise.resolve().then(function () { return require('./modules/customer-list/customer-list.module'); }).then(function (mod) { return mod.CustomerListModule; }); } },
@@ -38,7 +45,7 @@ var AppModule = /** @class */ (function () {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            declarations: [app_component_1.AppComponent, /* CustomerListComponent, SingleCustomerComponent, CustomerFormComponent,  */ header_component_1.HeaderComponent, dashboard_component_1.DashboardComponent],
+            declarations: [app_component_1.AppComponent, header_component_1.HeaderComponent, dashboard_component_1.DashboardComponent],
             imports: [platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
                 forms_1.ReactiveFormsModule,
@@ -51,11 +58,27 @@ var AppModule = /** @class */ (function () {
                 icon_1.MatIconModule,
                 slide_toggle_1.MatSlideToggleModule,
                 toolbar_1.MatToolbarModule,
+                button_toggle_1.MatButtonToggleModule,
+                core_2.TranslateModule.forRoot({
+                    loader: {
+                        provide: core_2.TranslateLoader,
+                        useFactory: HttpLoaderFactory,
+                        deps: [http_1.HttpClient]
+                    }
+                }),
             ],
-            providers: [customers_service_1.CustomersService, platform_browser_2.Title],
+            providers: [
+                customers_service_1.CustomersService, platform_browser_2.Title,
+                { provide: paginator_1.MatPaginatorIntl, useClass: translate_paginator_service_1.TranslatePaginatorService },
+                { provide: datepicker_1.MatDatepickerIntl, useClass: translate_datepicker_service_1.TranslateDatepickerService },
+            ],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);
     return AppModule;
 }());
 exports.AppModule = AppModule;
+function HttpLoaderFactory(http) {
+    return new http_loader_1.TranslateHttpLoader(http);
+}
+exports.HttpLoaderFactory = HttpLoaderFactory;

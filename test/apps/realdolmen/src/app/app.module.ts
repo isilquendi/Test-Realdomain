@@ -5,7 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CustomersService } from './services/customers.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient,HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomerListModule } from './modules/customer-list/customer-list.module';
@@ -14,7 +14,14 @@ import { CustomerFormModule } from './modules/customer-form/customer-form.module
 import { MatIconModule} from "@angular/material/icon";
 import { MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { Title } from '@angular/platform-browser';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslatePaginatorService } from './services/translate-paginator.service';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { TranslateDatepickerService } from './services/translate-datepicker.service';
+import { MatDatepickerIntl } from '@angular/material/datepicker';
 
 const appRoutes : Routes  = [
   {path : 'dashboard', component : DashboardComponent },
@@ -27,7 +34,7 @@ const appRoutes : Routes  = [
 ]
 
 @NgModule({
-  declarations: [AppComponent, /* CustomerListComponent, SingleCustomerComponent, CustomerFormComponent,  */HeaderComponent, DashboardComponent],
+  declarations: [AppComponent, HeaderComponent, DashboardComponent],
   imports: [BrowserModule,
             FormsModule,
             ReactiveFormsModule,
@@ -40,9 +47,25 @@ const appRoutes : Routes  = [
             MatIconModule,
             MatSlideToggleModule,
             MatToolbarModule,
-
+            MatButtonToggleModule,
+            TranslateModule.forRoot({
+              loader: {
+                  provide: TranslateLoader,
+                  useFactory: HttpLoaderFactory,
+                  deps: [HttpClient]
+              }
+          }),
   ],
-  providers: [CustomersService,Title],
+  providers: [
+    CustomersService,Title,
+    {provide: MatPaginatorIntl, useClass: TranslatePaginatorService, },
+    {provide: MatDatepickerIntl, useClass: TranslateDatepickerService},
+  ],
   bootstrap: [AppComponent],
+  
 })
 export class AppModule {}
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}

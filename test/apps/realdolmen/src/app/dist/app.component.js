@@ -11,10 +11,12 @@ var core_1 = require("@angular/core");
 var app_1 = require("firebase/app");
 require("firebase/analytics");
 var AppComponent = /** @class */ (function () {
-    function AppComponent(titleService) {
+    function AppComponent(titleService, translate) {
         this.titleService = titleService;
+        this.translate = translate;
         this.className = '';
         this.title = 'realdolmen';
+        translate.setDefaultLang('en');
         var firebaseConfig = {
             apiKey: "AIzaSyDPkSGWPXLtrMVS1XuSP2mCdwMFEUPP-hA",
             authDomain: "realdolmen-10996.firebaseapp.com",

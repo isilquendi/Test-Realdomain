@@ -6,7 +6,7 @@ import { SingleCustomerComponent } from '../../customer-list/single-customer/sin
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule} from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import { TranslateModule} from '@ngx-translate/core';
 
 
 @NgModule({
@@ -16,7 +16,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     SingleCustomerRoutingModule,
     MatButtonModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    TranslateModule.forChild()
+    
   ]
 })
 export class SingleCustomerModule { }

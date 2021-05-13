@@ -8,7 +8,7 @@
                 <mat-icon aria-hidden="false">
                     home
                 </mat-icon>
-                Dashboard
+                {{ 'dashboard.title' | translate}}
             </a>
         </li>
         <li routerLinkActive="active" (click)="menuUpdate()">
@@ -16,14 +16,23 @@
                 <mat-icon aria-hidden="false">
                     people
                 </mat-icon>
-                Customers
+                {{ 'customers.title' | translate}}
             </a>
         </li>
     </ul>
+    
     <div class="darkMode-toggle">
     <mat-icon>brightness_5</mat-icon>
     <mat-slide-toggle [formControl]="toggleControl" name="toggleControl" color="primary"></mat-slide-toggle>
     <mat-icon>bedtime</mat-icon>
+    </div>
+
+    <div class="language-toggle">
+        <mat-button-toggle-group [formControl]="languageControl" aria-label="Font Style">
+            <mat-button-toggle value="en" checked="true">EN</mat-button-toggle>
+            <mat-button-toggle value="fr">FR</mat-button-toggle>
+            <mat-button-toggle value="nl">NL</mat-button-toggle>
+        </mat-button-toggle-group>
     </div>
 
 </nav>

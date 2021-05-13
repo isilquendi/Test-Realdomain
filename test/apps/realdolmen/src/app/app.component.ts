@@ -2,7 +2,7 @@ import { Component,HostBinding } from '@angular/core';
 import firebase from "firebase/app";
 import {Title} from "@angular/platform-browser";
 import "firebase/analytics";
-
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'test-root',
@@ -13,7 +13,8 @@ import "firebase/analytics";
 export class AppComponent {
   @HostBinding('class') className = '';
   title = 'realdolmen';
-  constructor(private titleService: Title) {
+  constructor(private titleService: Title, private translate: TranslateService ) {
+  translate.setDefaultLang('en');
   var firebaseConfig = {
     apiKey: "AIzaSyDPkSGWPXLtrMVS1XuSP2mCdwMFEUPP-hA",
     authDomain: "realdolmen-10996.firebaseapp.com",

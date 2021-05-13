@@ -59,6 +59,13 @@ nav ul li a:hover {
     display: none;
 }
 
+.language-toggle {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
 @media screen and (max-width: 1023px) {
     .menu {
         display: block;
