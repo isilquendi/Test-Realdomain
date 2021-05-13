@@ -32,6 +32,8 @@
   "back" : "Terug",
   "edit" : "Bewerk",
   "save" : "Sparen",
-  "chooseFile" : "Kies Bestand"
+  "chooseFile" : "Kies Bestand",
+  "fileUpload" : "Bestand geüpload !",
+  "email.invalid":"E-mailadres niet geldig"
   
 }

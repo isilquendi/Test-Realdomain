@@ -26,8 +26,9 @@ export class CustomerListComponent implements OnInit, OnDestroy, AfterViewInit {
   customerSubscription : Subscription;
   dataSource = new MatTableDataSource();
   selection = new SelectionModel(true,[]);
-
+  currentRoute : string;
   loading = true;
+  isSearching = false;
 
   constructor(private customersService : CustomersService,
               private translate: TranslateService,
@@ -38,7 +39,7 @@ export class CustomerListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-    
+    this.currentRoute = this.router.url;
      /** Set the Title */
     this.translate.stream('customers.list').subscribe((value) => {
       this.titleService.setTitle(value)
@@ -95,14 +96,26 @@ export class CustomerListComponent implements OnInit, OnDestroy, AfterViewInit {
   
 
   applyFilter(event: Event) {
+    this.isSearching=true;
     const filterValue = (event.target as HTMLInputElement).value;
     if(filterValue !="") {
-      const customerTemp = this.customers.filter(function(customer) {
+      this.customersService.filterCustomers2(filterValue).then((result)=>{
+        const customersTemp = Object.keys(result).map(key => {
+          return result[key];
+        })
+        this.isSearching=false;
+        this.dataSource = new MatTableDataSource(customersTemp);  
+      })
+      /* this.customersService.filterCustomers(filterValue); */
+      /* const customerTemp = this.customers.filter(function(customer) {
         return customer.name.toLowerCase().includes(filterValue.trim().toLowerCase()) || customer.lastname.toLowerCase().includes(filterValue.trim().toLowerCase()) || customer.email.toLowerCase().includes(filterValue.trim().toLowerCase()) || new Date(customer.birthday).toLocaleDateString().includes(filterValue.trim()) ;
       }) 
-      this.dataSource = new MatTableDataSource(customerTemp);      
+      this.dataSource = new MatTableDataSource(customerTemp);       */
+      this.dataSource = new MatTableDataSource(this.customers);  
     }
     else {
+      this.isSearching=false;
+      this.customersService.getCustomers();
       this.dataSource = new MatTableDataSource(this.customers);  
     }
     

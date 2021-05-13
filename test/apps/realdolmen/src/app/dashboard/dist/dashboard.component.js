@@ -9,12 +9,14 @@ exports.__esModule = true;
 exports.DashboardComponent = void 0;
 var core_1 = require("@angular/core");
 var DashboardComponent = /** @class */ (function () {
-    function DashboardComponent(titleService, translate) {
+    function DashboardComponent(titleService, translate, router) {
         this.titleService = titleService;
         this.translate = translate;
+        this.router = router;
     }
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.currentRoute = this.router.url;
         this.translate.stream('dashboard.title').subscribe(function (value) {
             _this.titleService.setTitle(value);
         });

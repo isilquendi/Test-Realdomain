@@ -18,10 +18,9 @@ var CustomerFormComponent = /** @class */ (function () {
         this.route = route;
         this.titleService = titleService;
         this.translate = translate;
+        this.loading = true;
         this.fileIsUploading = false;
         this.fileUploaded = false;
-        this.male = "Male";
-        this.female = "Female";
         this.isEdit = false;
         this.maxDate = new Date(Date.now());
         this.interests = [
@@ -36,6 +35,7 @@ var CustomerFormComponent = /** @class */ (function () {
     }
     CustomerFormComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.currentRoute = this.router.url;
         this.translate.onLangChange.subscribe(function (e) {
             /**hack to prevent the ExpressionChangedAfterItHasBeenCheckedError on the mat-select */
             var genderTemp = _this.customerForm.get('gender').value;
@@ -62,6 +62,7 @@ var CustomerFormComponent = /** @class */ (function () {
                         });
                     }
                     _this.availability = _this.customer.availability;
+                    _this.loading = false;
                 }
                 else
                     _this.router.navigate(['/customer']);
@@ -70,6 +71,7 @@ var CustomerFormComponent = /** @class */ (function () {
             });
         }
         else {
+            this.loading = false;
             this.translate.stream('customers.add').subscribe(function (value) {
                 _this.titleService.setTitle(value);
             });

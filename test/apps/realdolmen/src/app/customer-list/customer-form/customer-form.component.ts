@@ -13,6 +13,9 @@ import {TranslateService, LangChangeEvent} from '@ngx-translate/core';
   styleUrls: ['./customer-form.component.css'],
 })
 export class CustomerFormComponent implements OnInit {
+  loading = true;
+  currentRoute : string;
+
   customer : Customer;
 
   customerForm  : FormGroup;
@@ -20,8 +23,6 @@ export class CustomerFormComponent implements OnInit {
   fileIsUploading = false;
   fileUrl : string;
   fileUploaded = false;
-  male = "Male";
-  female ="Female";
   
   isEdit = false;
 
@@ -51,7 +52,7 @@ export class CustomerFormComponent implements OnInit {
                ) { }
 
   ngOnInit(): void {
-
+    this.currentRoute = this.router.url;
     
     this.translate.onLangChange.subscribe((e : LangChangeEvent)=> {
       /**hack to prevent the ExpressionChangedAfterItHasBeenCheckedError on the mat-select */
@@ -60,9 +61,6 @@ export class CustomerFormComponent implements OnInit {
       setTimeout(() => {
         this.customerForm.controls['gender'].setValue(genderTemp);
       }, 1);
-
-
-      
     })
     
 
@@ -85,7 +83,7 @@ export class CustomerFormComponent implements OnInit {
               })
             }
             this.availability = this.customer.availability;
-           
+            this.loading=false;
           }
           else this.router.navigate(['/customer']);
           this.initForm();
@@ -95,6 +93,7 @@ export class CustomerFormComponent implements OnInit {
     }
 
     else {
+      this.loading=false;
       this.translate.stream('customers.add').subscribe((value) => {
         this.titleService.setTitle(value)
       }) ;

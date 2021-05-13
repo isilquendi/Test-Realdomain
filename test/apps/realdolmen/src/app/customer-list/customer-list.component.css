@@ -35,6 +35,10 @@ tr.cdk-row:hover {
     left: 0;
 }
 
+::ng-deep  .darkMode .loading {
+    background: rgb(85, 85, 85);
+}
+
 mat-row mat-cell:last-child, mat-header-cell:last-child {
     
     max-width: 30px;
@@ -64,6 +68,13 @@ table {
     justify-content: space-between;
 }
 
+.search {
+    
+    display: flex;
+    align-items: center;
+}
+
+
 
 @media screen and (max-width: 767px) {
     .form-controllers {
@@ -72,6 +83,10 @@ table {
     }
     .mat-column-creationDate  {
         display: none;
+    }
+
+    .search .mat-form-field {
+        flex-grow: 1;
     }
 
     .mat-column-modificationDate  {

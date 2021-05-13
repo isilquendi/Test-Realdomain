@@ -32,6 +32,8 @@
     "back" : "Retour",
     "edit" : "Editer",
     "save" : "Sauvegarder",
-    "chooseFile" : "Choisir une Photo"
+    "chooseFile" : "Choisir une Photo",
+    "fileUpload" : "Photo Téléchargée !",
+    "email.invalid":"Email non valide"
  
   }

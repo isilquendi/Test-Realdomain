@@ -22,9 +22,11 @@ var CustomerListComponent = /** @class */ (function () {
         this.dataSource = new table_1.MatTableDataSource();
         this.selection = new collections_1.SelectionModel(true, []);
         this.loading = true;
+        this.isSearching = false;
     }
     CustomerListComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.currentRoute = this.router.url;
         /** Set the Title */
         this.translate.stream('customers.list').subscribe(function (value) {
             _this.titleService.setTitle(value);
@@ -60,14 +62,27 @@ var CustomerListComponent = /** @class */ (function () {
         this.dataSource.sort = this.sort;
     };
     CustomerListComponent.prototype.applyFilter = function (event) {
+        var _this = this;
+        this.isSearching = true;
         var filterValue = event.target.value;
         if (filterValue != "") {
-            var customerTemp = this.customers.filter(function (customer) {
-                return customer.name.toLowerCase().includes(filterValue.trim().toLowerCase()) || customer.lastname.toLowerCase().includes(filterValue.trim().toLowerCase()) || customer.email.toLowerCase().includes(filterValue.trim().toLowerCase()) || new Date(customer.birthday).toLocaleDateString().includes(filterValue.trim());
+            this.customersService.filterCustomers2(filterValue).then(function (result) {
+                var customersTemp = Object.keys(result).map(function (key) {
+                    return result[key];
+                });
+                _this.isSearching = false;
+                _this.dataSource = new table_1.MatTableDataSource(customersTemp);
             });
-            this.dataSource = new table_1.MatTableDataSource(customerTemp);
+            /* this.customersService.filterCustomers(filterValue); */
+            /* const customerTemp = this.customers.filter(function(customer) {
+              return customer.name.toLowerCase().includes(filterValue.trim().toLowerCase()) || customer.lastname.toLowerCase().includes(filterValue.trim().toLowerCase()) || customer.email.toLowerCase().includes(filterValue.trim().toLowerCase()) || new Date(customer.birthday).toLocaleDateString().includes(filterValue.trim()) ;
+            })
+            this.dataSource = new MatTableDataSource(customerTemp);       */
+            this.dataSource = new table_1.MatTableDataSource(this.customers);
         }
         else {
+            this.isSearching = false;
+            this.customersService.getCustomers();
             this.dataSource = new table_1.MatTableDataSource(this.customers);
         }
         this.sortCustomer();

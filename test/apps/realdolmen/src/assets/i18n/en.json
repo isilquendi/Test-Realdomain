@@ -32,6 +32,8 @@
     "back" : "Back",
     "edit" : "Edit",
     "save" : "Save",
-    "chooseFile" : "Choose File"
+    "chooseFile" : "Choose File",
+    "fileUpload" : "File Uploaded !",
+    "email.invalid":"Email not valid"
     
   }

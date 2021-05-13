@@ -16,9 +16,11 @@ var SingleCustomerComponent = /** @class */ (function () {
         this.router = router;
         this.titleService = titleService;
         this.translate = translate;
+        this.loading = true;
     }
     SingleCustomerComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.currentRoute = this.router.url;
         /** Set the Title */
         this.translate.stream('customers.single').subscribe(function (value) {
             _this.titleService.setTitle(value);
@@ -27,8 +29,10 @@ var SingleCustomerComponent = /** @class */ (function () {
         this.customer = new customer_model_1.Customer('', '', '');
         var id = this.route.snapshot.params['id'];
         this.customerService.getSingleCustomer(id).then(function (customer) {
-            if (customer)
+            if (customer) {
                 _this.customer = customer;
+                _this.loading = false;
+            }
             /** If the ID doesn't exist return to the Customer List */
             else
                 _this.router.navigate(['/customer']);

@@ -1,4 +1,9 @@
+<div *ngIf=(loading) class="loading" color="primary">
+    <mat-spinner></mat-spinner>
+</div>
+
 <div class="single-customer">
+    <h6>{{ currentRoute }}</h6>
     <h2>{{ 'customers.title' | translate }}</h2>
     <div class="content">
         <div class="img-container"><img [src]="getPhotoUrl()"></div>

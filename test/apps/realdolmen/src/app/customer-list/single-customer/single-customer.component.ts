@@ -12,6 +12,8 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class SingleCustomerComponent implements OnInit {
   customer : Customer;
+  currentRoute : string;
+  loading = true;
   constructor(private route : ActivatedRoute,
               private customerService : CustomersService,
               private router : Router,
@@ -20,7 +22,7 @@ export class SingleCustomerComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
-
+    this.currentRoute = this.router.url;
     /** Set the Title */
     this.translate.stream('customers.single').subscribe((value) => {
       this.titleService.setTitle(value)
@@ -32,8 +34,10 @@ export class SingleCustomerComponent implements OnInit {
     this.customerService.getSingleCustomer(id).then(
       (customer : Customer) => {
 
-        if(customer) this.customer = customer;
-
+        if(customer) {
+          this.customer = customer;
+          this.loading = false;
+        }
         /** If the ID doesn't exist return to the Customer List */
         else this.router.navigate(['/customer']);
       },  
