@@ -45,22 +45,6 @@ var CustomersService = /** @class */ (function () {
     };
     CustomersService.prototype.filterCustomers = function (filter) {
         var _this = this;
-        app_1["default"].database().ref('customers/').orderByChild('email')
-            .startAt(filter).endAt(filter + "\uf8ff").once('value').then(function (data) {
-            var result = data.val();
-            if (result) {
-                _this.customers = Object.keys(result).map(function (key) {
-                    return result[key];
-                });
-            }
-            else {
-                _this.customers = [];
-            }
-            _this.emitCustomers();
-        });
-    };
-    CustomersService.prototype.filterCustomers2 = function (filter) {
-        var _this = this;
         return new Promise(function (resolve, reject) {
             app_1["default"].database().ref('customers/').orderByChild('email')
                 .startAt(filter).endAt(filter + "\uf8ff").once('value').then(function (data) {

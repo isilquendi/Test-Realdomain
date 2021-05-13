@@ -99,7 +99,7 @@ export class CustomerListComponent implements OnInit, OnDestroy, AfterViewInit {
     this.isSearching=true;
     const filterValue = (event.target as HTMLInputElement).value;
     if(filterValue !="") {
-      this.customersService.filterCustomers2(filterValue).then((result)=>{
+      this.customersService.filterCustomers(filterValue).then((result)=>{
         const customersTemp = Object.keys(result).map(key => {
           return result[key];
         })

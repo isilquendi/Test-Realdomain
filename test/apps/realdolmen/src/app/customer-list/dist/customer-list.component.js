@@ -66,7 +66,7 @@ var CustomerListComponent = /** @class */ (function () {
         this.isSearching = true;
         var filterValue = event.target.value;
         if (filterValue != "") {
-            this.customersService.filterCustomers2(filterValue).then(function (result) {
+            this.customersService.filterCustomers(filterValue).then(function (result) {
                 var customersTemp = Object.keys(result).map(function (key) {
                     return result[key];
                 });

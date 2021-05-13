@@ -47,26 +47,6 @@ export class CustomersService {
 
  
   filterCustomers(filter : string) {
-    firebase.database().ref('customers/').orderByChild('email')
-    .startAt(filter).endAt(filter+"\uf8ff").once('value').then(
-      (data)=> {
-          const result = data.val();
-          if(result) {
-            this.customers = Object.keys(result).map(key => {
-              return result[key];
-            })
-          }
-          else {
-            this.customers=[];
-          }
-        this.emitCustomers();
-      },
-      
-    )
-    
-  }
-
-  filterCustomers2(filter : string) {
     return new Promise ( 
       (resolve, reject) => {
       firebase.database().ref('customers/').orderByChild('email')
